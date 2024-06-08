@@ -1,0 +1,25 @@
+﻿@model WebsiteBanTraiCay05.Models.StatisticalModel
+@if (Model != null)
+{
+    <div class="statistical">
+        <table class="table">
+            <tr>
+                <td>Hôm nay</td>
+                <td>@Model.Today</td>
+            </tr>
+            <tr>
+                <td>Hôm qua</td>
+                <td>@Model.Yesterday</td>
+            </tr>
+            <tr>
+                <td>Tuần này</td>
+                <td>@Model.ThisWeek</td>
+            </tr>
+            <tr>
+                <td>Số người Online</td>
+                <td>@ViewBag.Visitors_online</td>
+            </tr>
+        </table>
+    </div>
+}
+

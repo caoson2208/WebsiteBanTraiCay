@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Thanh  toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Thanh toán</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active text-white">Thanh toán</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+<!-- Checkout Page Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        @if (ViewBag.CheckCart != null)
+        {
+            <div class="row g-5">
+                <div id="showSuccess"></div>
+                <div class="col-md-12 col-lg-6 col-xl-6">
+                    @Html.Action("Partial_InformationCustomer", "Cart")
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-6">
+                    @Html.Action("Partial_InformationProduct", "Cart")
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="container-fluid py-5">
+                <div class="container py-5 text-center">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <img src="~/Content/assets/img/cart-empty.png" />
+                            <h1 class="mt-5">Không có sản phẩm nào</h1>
+                            <div class="mt-5">
+                                <a class="btn border-secondary rounded-pill py-3 px-5" href="/san-pham">Trở lại trang sản phẩm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Checkout Page End -->
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('body').on('change', '#typePayment', function () {
+                var type = $(this).val();
+                $('#loadFormPayment').hide();
+                if (type == "2") {
+                    $('#loadFormPayment').show();
+                }
+            });
+
+            $('#myForm').validate({
+                rules: {
+                    'CustomerName': {
+                        required: true
+                    },
+                    'Phone': {
+                        required: true
+                    },
+                    'Address': {
+                        required: true
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    'CustomerName': 'Bạn không được để trống họ và tên',
+                    'Phone': 'Bạn khônng được để trống số điện thoại',
+                    'Address': 'Bạn không được để trống địa chỉ',
+                    'Email': 'Email chưa hợp lệ'
+                }
+            });
+        });
+    </script>
+}

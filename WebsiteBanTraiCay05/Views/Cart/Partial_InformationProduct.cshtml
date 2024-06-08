@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WebsiteBanTraiCay05.Models.CartItem>
+@using WebsiteBanTraiCay05.Common
+
+<div class="table-responsive">
+    <table class="table text-center">
+        @if (Model != null && Model.Any())
+        {
+            <tr>
+                <th scope="col">Ảnh sản phẩm</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+                <th></th>
+            </tr>
+            var i = 0;
+            var totalAmount = decimal.Zero;
+            foreach (var item in Model)
+            {
+                totalAmount += item.TotalPrice;
+                <tr id="trow_@item.ProductId">
+                    <td>
+                        <div class="d-flex align-items-center ">
+                            <img src="@item.ProductImg" class="img-fluid" width="80" height="80" alt="">
+                        </div>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">
+                            <a href="/chi-tiet/@item.Alias-p@(item.ProductId)">
+                                @item.ProductName
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">@Common.FormatNumber(item.Price, 0)</p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">@item.Quantity</p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">@Common.FormatNumber(item.TotalPrice, 0) </p>
+                    </td>
+                </tr>
+                i++;
+            }
+            <tr>
+                <th class="py-3">
+                    <p class="mb-0 text-dark py-3">Tạm tính</p>
+                </th>
+                <td colspan="3"></td>
+                <td class="py-3">
+                    <div class="py-3 border-bottom border-top">
+                        <p class="mb-0 text-dark">@Common.FormatNumber(totalAmount, 0) </p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="py-3">
+                    <p class="mb-0 text-dark py-3">Vận chuyển</p>
+                </th>
+                <td colspan="3"></td>
+                <td class="py-3">
+                    <div class="py-3 border-bottom border-top">
+                        <p class="mb-0 text-dark">30,000</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                </th>
+                <th class="py-4">
+                    <h5 class="mb-0 text-dark text-uppercase py-3">Tổng tiền</h5>
+                </th>
+                <th colspan="2" class="py-5"></th>
+                <th class="py-4">
+                    <div class="py-3 border-bottom border-top">
+                        <p class="mb-0 text-dark">@Common.FormatNumber(totalAmount + 30000, 0)</p>
+                    </div>
+                </th>
+            </tr>
+        }
+        else
+        {
+
+        }
+    </table>
+</div>

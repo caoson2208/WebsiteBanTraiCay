@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebsiteBanTraiCay05.Models.EF.Product>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        var strImge = "";
+        var img = item.ProductImage.FirstOrDefault(x => x.IsDefault);
+        if (img != null)
+        {
+            strImge = img.Image;
+        }
+        if (item.ProductCategory.Alias != null && item.ProductCategory.Alias == "rau-cu")
+        {
+            <div class="border border-primary rounded position-relative vesitable-item">
+                <div class="vesitable-img">
+                    <img src="@strImge" class="img-fluid w-100 rounded-top" style="height: 300px!important;" alt="@item.Title">
+                </div>
+                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Rau củ</div>
+                <div class="p-4 rounded-bottom">
+                    <h4>@item.Title</h4>
+                    <p>@item.Description</p>
+                    <div>
+                        @if (item.PriceSale > 0)
+                        {
+                            <div class="text-dark fs-5 fw-bold mb-0">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.PriceSale, 0)/kg</div>
+                        }
+                        else
+                        {
+                            <div class="text-dark fs-5 fw-bold mb-0">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.Price, 0)/kg</div>
+                        }
+                        <br />
+                        <a href="#" id="btnAddToCart" class="btn border border-secondary rounded-pill px-3 text-primary" data-id="@item.Id"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+}
+
+
+
+
+
+
+

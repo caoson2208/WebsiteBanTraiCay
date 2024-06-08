@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebsiteBanTraiCay05.Models.EF.ProductCategory>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="list-unstyled fruite-categorie">
+        @foreach (var item in Model)
+        {
+            if (ViewBag.CateId == item.Id)
+            {
+                <li>
+                    <div class="d-flex justify-content-between fruite-name">
+                        <a href="/danh-muc-san-pham/@item.Alias-@(item.Id)" style="color: #ffb524;"><i class="fas fa-apple-alt me-2"></i>@item.Title</a>
+                    </div>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <div class="d-flex justify-content-between fruite-name">
+                        <a href="/danh-muc-san-pham/@item.Alias-@(item.Id)"><i class="fas fa-apple-alt me-2"></i>@item.Title</a>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+}
+
+
+
+
+

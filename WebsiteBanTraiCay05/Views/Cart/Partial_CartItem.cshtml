@@ -1,0 +1,131 @@
+﻿@model IEnumerable<WebsiteBanTraiCay05.Models.CartItem>
+@using WebsiteBanTraiCay05.Common
+
+<div class="table-responsive">
+    <table class="table">
+        @if (Model != null && Model.Any())
+        {
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Ảnh sản phẩm</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Danh mục</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+                <th></th>
+            </tr>
+            var i = 0;
+            var totalAmount = decimal.Zero;
+            foreach (var item in Model)
+            {
+                totalAmount += item.TotalPrice;
+                <tr id="trow_@item.ProductId">
+                    <td>
+                        <p class="mb-0 mt-4">@(i+1)</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="@item.ProductImg" class="img-fluid me-5" width="80" height="80" alt="">
+                        </div>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">
+                            <a href="/chi-tiet/@item.Alias-p@(item.ProductId)">
+                                @item.ProductName
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">@item.CategoryName</p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">@Common.FormatNumber(item.Price, 0)</p>
+                    </td>
+                    <td>
+                        <div class="input-group quantity mt-4" style="width: 100px;">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <input id="Quantity_@item.ProductId" type="text" class="form-control form-control-sm text-center border-0" value="@item.Quantity">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4">@Common.FormatNumber(item.TotalPrice, 0) </p>
+                    </td>
+                    <td>
+                        <a href="#" id="btnUpdate" class="btn btn-md rounded-circle bg-light border mt-4" data-id="@item.ProductId">
+                            <i class="fa fa-check text-success"></i>
+                        </a>
+                        <a href="#" id="btnDelete" class="btn btn-md rounded-circle bg-light border mt-4" data-id="@item.ProductId">
+                            <i class="fa fa-times text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+                i++;
+            }
+            <tr class="mt-5 d-block"></tr>
+            <tr>
+                <td colspan="4">
+                    <input type="text" class="border-0 border-bottom rounded w-50 me-5 py-3 mb-4" placeholder="Mã giảm giá">
+                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Áp dụng</button>
+                </td>
+                <td colspan="5">
+                    <div class="bg-light rounded">
+                        <div class="p-4">
+                            <h1 class="display-6 mb-4">Hoá đơn thanh toán </h1>
+                            <div class="d-flex justify-content-between mb-4">
+                                <h5 class="mb-0 me-4">Tạm tính</h5>
+                                <p class="mb-0">@Common.FormatNumber(totalAmount, 0)</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-0 me-4">Vận chuyển</h5>
+                                <div class="">
+                                    <p class="mb-0">@Common.FormatNumber(30000, 0)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                            <h5 class="mb-0 ps-4 me-4">Tổng tiền</h5>
+                            <p class="mb-0 pe-4">@Common.FormatNumber(totalAmount + 30000, 0)</p>
+                        </div>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <a href="/thanh-toan" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Thanh toán</a>
+                        }
+                        else
+                        {
+                            <a href="/account/login" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Vui lòng đăng nhập</a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <div class="container-fluid py-5">
+                    <div class="container py-5 text-center">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <img src="https://bizweb.dktcdn.net/100/360/810/themes/732049/assets/empty-cart.png?1669015697083" />
+                                <div class="mt-5">
+                                    <a class="btn border-secondary rounded-pill py-3 px-5" href="/">Trở lại trang chủ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+        }
+    </table>
+</div>
+
+

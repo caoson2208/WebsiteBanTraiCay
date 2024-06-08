@@ -1,0 +1,230 @@
+﻿@model PagedList.PagedList<WebsiteBanTraiCay05.Models.EF.Product>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /*** Pagination Start ***/
+    .pagination li {
+        text-decoration: none;
+        transition: 0.5s;
+        margin: 0 4px;
+        border-radius: 10px !important;
+        border: 1px solid var(--bs-secondary);
+    }
+
+    .pagination li:not(:active):hover,
+    .pagination li.active {
+        background-color: var(--bs-primary);
+        color: var(--bs-light);
+        border: 1px solid var(--bs-secondary);
+    }
+
+    .pagination li a {
+        border: none;
+        border-radius: 10px !important;
+        padding: 10px 20px;
+        display: block;
+    }
+    /*** Pagination End ***/
+</style>
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Sản phẩm</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active text-white">Sản phẩm</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
+<!-- Fruits Shop Start-->
+<div class="container-fluid fruite py-5">
+    <div class="container py-5">
+        <h1 class="mb-4">Cửa hàng trái cây tươi</h1>
+        <div class="row g-4">
+            <div class="col-lg-12">
+                <div class="row g-4">
+                    <div class="col-xl-3">
+                        <div class="input-group w-100 mx-auto d-flex">
+                            <input type="search" class="form-control p-3" placeholder="Từ khoá" aria-describedby="btnSearch">
+                            <buton type="submit" id="btnSearch" class="input-group-text p-3" style="cursor: pointer"><i class="fa fa-search"></i></buton>
+                        </div>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3">
+                        <div class="row g-4">
+                            <div class="col-lg-12">
+                                <div class="mb-3 mt-4">
+                                    <h4>Danh mục sản phẩm</h4>
+                                    @Html.Action("MenuLeft", "Menu")
+                                </div>
+                                @Html.Action("Refresh", "Home")
+                            </div>
+                            <div class="col-lg-12">
+                                <h4 class="mb-3">Featured products</h4>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                        <img src="~/Content/assets/img/featur-1.jpg" class="img-fluid rounded" alt="">
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-2">Big Banana</h6>
+                                        <div class="d-flex mb-2">
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="d-flex mb-2">
+                                            <h5 class="fw-bold me-2">2.99 $</h5>
+                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                        <img src="~/Content/assets/img/featur-2.jpg" class="img-fluid rounded" alt="">
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-2">Big Banana</h6>
+                                        <div class="d-flex mb-2">
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="d-flex mb-2">
+                                            <h5 class="fw-bold me-2">2.99 $</h5>
+                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                        <img src="~/Content/assets/img/featur-3.jpg" class="img-fluid rounded" alt="">
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-2">Big Banana</h6>
+                                        <div class="d-flex mb-2">
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star text-secondary"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="d-flex mb-2">
+                                            <h5 class="fw-bold me-2">2.99 $</h5>
+                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center my-4">
+                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="position-relative">
+                                    <img src="~/Content/assets/img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                                    <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
+                                        <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="row">
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    var strImge = "";
+                                    var img = item.ProductImage.FirstOrDefault(x => x.IsDefault);
+                                    if (img != null)
+                                    {
+                                        strImge = img.Image;
+                                    }
+                                    if (item.ProductCategory.Alias != null && item.ProductCategory.Alias == "rau-cu")
+                                    {
+                                        <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
+                                            <a href="/chi-tiet/@item.Alias-p@(item.Id)" class="rounded position-relative fruite-item">
+                                                <div class="fruite-img">
+                                                    <img src="@strImge" class="img-fluid w-100 rounded-top" style="height: 300px!important;" alt="@item.Title">
+                                                </div>
+                                                <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Rau củ</div>
+                                                <div class="p-4 border border-primary border-top-0 rounded-bottom">
+                                                    <h4>@item.Title</h4>
+                                                    <p>@item.Description</p>
+                                                    <div>
+                                                        @if (item.PriceSale > 0)
+                                                        {
+                                                            <div class="text-dark fs-5 fw-bold mb-0">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.PriceSale, 0)/kg</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="text-dark fs-5 fw-bold mb-0">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.Price, 0)/kg</div>
+                                                        }
+                                                        <br />
+                                                        <a href="#" id="btnAddToCart" class="btn border border-secondary rounded-pill px-3 text-primary" data-id="@item.Id"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ</a>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6 col-lg-6 col-xl-4 mb-4">
+                                            <a href="/chi-tiet/@item.Alias-p@(item.Id)" class="rounded position-relative fruite-item">
+                                                <div class="fruite-img">
+                                                    <img src="@strImge" class="img-fluid w-100 rounded-top" style="height: 300px!important;" alt="@item.Title">
+                                                </div>
+                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Trái cây</div>
+                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                    <h4>@item.Title</h4>
+                                                    <p>@item.Description</p>
+                                                    <div>
+                                                        @if (item.PriceSale > 0)
+                                                        {
+                                                            <div class="text-dark fs-5 fw-bold mb-0">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.PriceSale, 0)/kg</div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="text-dark fs-5 fw-bold mb-0">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.Price, 0)/kg</div>
+                                                        }
+                                                        <br />
+                                                        <a href="#" id="btnAddToCart" class="btn border border-secondary rounded-pill px-3 text-primary" data-id="@item.Id"><i class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ</a>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            }
+                            <div class="col-12">
+                                <div class="pagination d-flex justify-content-center mt-5">
+                                    @Html.PagedListPager(Model,
+                                        page => Url.Action("Index", new { page }),
+                                        new PagedListRenderOptions
+                                        {
+                                            LiElementClasses = new[] { "rounded" },
+                                            UlElementClasses = new[] { "pagination", "d-flex", "justify-content-center", "mt-5" },
+                                            LinkToPreviousPageFormat = "&laquo;",
+                                            LinkToNextPageFormat = "&raquo;"
+                                        })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

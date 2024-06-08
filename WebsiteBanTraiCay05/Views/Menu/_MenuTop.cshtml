@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebsiteBanTraiCay05.Models.EF.Category>
+
+@if (Model != null && Model.Any())
+{
+    <div class="navbar-nav mx-auto">
+        @foreach (var item in Model)
+        {
+            string alias = item.Alias;
+            if (string.IsNullOrEmpty(alias) || alias.Equals("trang-chu"))
+            {
+                alias = "/";
+            }
+            else if (alias.Equals("san-pham"))
+            {
+                alias = "/san-pham";
+            }
+            else if (alias.Equals("tin-tuc"))
+            {
+                alias = "/tin-tuc";
+            }
+            else if (alias.Equals("lien-he"))
+            {
+                alias = "/lien-he";
+            }
+            <a href="@alias" class="nav-item nav-link @(IsCurrentPage(alias) ? "active" : "")">@item.Title</a>
+        }
+    </div>
+}
+
+@functions {
+    bool IsCurrentPage(string url)
+    {
+        var currentPageUrl = Context.Request.Path;
+
+        // Nếu url là "/" (trang chủ) và currentPageUrl cũng là "/" thì trả về true
+        if (url == "/" && currentPageUrl == "/")
+        {
+            return true;
+        }
+        else if(url == "/san-pham" && currentPageUrl == "/san-pham")
+        {
+            return true;
+        }
+        else if (url == "/tin-tuc" && currentPageUrl == "/tin-tuc")
+        {
+            return true;
+        }
+        else if (url == "/lien-he" && currentPageUrl == "/lien-he")
+        {
+            return true;
+        }
+        return false;
+    }
+}
+

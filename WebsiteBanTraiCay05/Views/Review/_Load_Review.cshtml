@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebsiteBanTraiCay05.Models.EF.Review>
+
+@if (Model != null && Model.Any())
+{
+    <h3 class="mb-3">Đánh giá (@ViewBag.Count)</h3>
+    foreach (var item in Model)
+    {
+        <div class="d-flex">
+            <img src="~/Content/assets/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+            <div class="">
+                <p class="mb-2" style="font-size: 14px;">@item.CreateDate.ToString("dd MM yyyy")</p>
+                <div class="d-flex justify-content-between">
+                    <h5>@item.FullName</h5>
+                    <div class="d-flex mb-3">
+                        <i class="fa fa-star text-secondary"></i>
+                        <i class="fa fa-star text-secondary"></i>
+                        <i class="fa fa-star text-secondary"></i>
+                        <i class="fa fa-star text-secondary"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                </div>
+                <p>
+                    @item.Content
+                </p>
+            </div>
+        </div>
+    }
+}
+
+

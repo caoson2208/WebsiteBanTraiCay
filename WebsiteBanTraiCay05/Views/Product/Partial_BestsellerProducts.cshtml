@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebsiteBanTraiCay05.Models.EF.Product>
+
+@{
+    ViewBag.Title = "Partial_BestsellerProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        var strImge = "";
+        var img = item.ProductImage.FirstOrDefault(x => x.IsDefault);
+        if (img != null)
+        {
+            strImge = img.Image;
+        }
+        <div class="col-lg-6 col-xl-4">
+            <div class="p-4 rounded bg-light">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <img src="@strImge" class="img-fluid rounded-circle w-100" alt="@item.Title">
+                    </div>
+                    <div class="col-6">
+                        <a href="#" class="h5">@item.Title</a>
+                        <div class="d-flex my-3">
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star text-primary"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        @if (item.PriceSale > 0)
+                        {
+                            <h4 class="mb-3">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.PriceSale, 0)/kg<</h4>
+                        }
+                        else
+                        {
+                            <h4 class="mb-3">@WebsiteBanTraiCay05.Common.Common.FormatNumber(item.Price, 0)/kg<</h4>
+                        }
+                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+   
